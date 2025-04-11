@@ -1,7 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using Humanizer;
+using Spectre.Console.Rendering;
 
 namespace SpeedType
 {
@@ -26,23 +28,37 @@ namespace SpeedType
         /// </remarks>
         public SentenceProvider()
         {
-            random = // ////////// => TO IMPLEMENT <= //////////// //
             
-            string directoryPath = Path.GetFullPath(
-                Path.Combine(
-                    AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\"
-                )
-            );
-            string filePath = Path.Combine(directoryPath, "sentences.txt");
-
-            if (File.Exists(filePath))
+            string random;
+            try
             {
-                sentences = // ////////// => TO IMPLEMENT <= //////////// //
+                StreamReader sr = new StreamReader("C:\\sentences.txt");
+                line = sr.ReadLine();
+                while(line != null)
+                sr.Close();
+                Console.ReadLine();
             }
-            else
+
+            finally
+
             {
-                sentences = new[] { "No Sentences Found! Please Provide a"
-                    + " File." };
+                string directoryPath = Path.GetFullPath(
+                    Path.Combine(
+                        AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\"
+                    )
+                );
+                
+                string filePath = Path.Combine(directoryPath, "C:\\sentences.txt");
+
+                if (File.Exists(filePath))
+                {
+                    Console.WriteLine(e.Message);
+                }
+                else
+                {
+                    sentences = new[] { "No Sentences Found! Please Provide a"
+                        + " File." };
+                }
             }
         }
 
@@ -55,7 +71,9 @@ namespace SpeedType
         /// </returns>
         public string GetRandomSentence()
         {
-            // ////////// => TO IMPLEMENT <= //////////// //
+            return sentences;
         }
     }
 }
+
+
